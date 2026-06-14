@@ -17,7 +17,11 @@ app.use(cors({ origin: FRONTEND_URL, credentials: true })); // CORS middleware t
 app.use(clerkMiddleware()); // Clerk middleware to handle authentication
 
 app.get('/health', async (req, res) => {
-    res.status(200).json({ ok: true });
+    try {
+        res.status(200).json({ ok: true });
+    }   catch (error) {
+        console.error('Error in health check:', error);
+    }
 });
 
 app.listen(PORT, () => {
